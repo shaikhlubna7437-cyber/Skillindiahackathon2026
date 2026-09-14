@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Urban Lens | SIH 2026</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#07111f;color:#fff}
+header{
+  height:70px;padding:0 6%;display:flex;align-items:center;
+  justify-content:space-between;background:#0b1728;
+  border-bottom:1px solid #1d3048
+}
+.logo{font-size:25px;font-weight:bold;color:#32e6a1}
+.logo span{color:#fff}
+nav a{color:#b8c7d9;text-decoration:none;margin-left:25px}
+nav a:hover{color:#32e6a1}
+
+.hero{
+  padding:70px 6%;display:flex;align-items:center;
+  justify-content:space-between;gap:40px;
+  background:linear-gradient(135deg,#081426,#0b2030)
+}
+.hero-text{max-width:650px}
+.badge{
+  display:inline-block;padding:8px 14px;border-radius:20px;
+  background:#123b43;color:#32e6a1;font-size:13px;margin-bottom:20px
+}
+h1{font-size:54px;line-height:1.05;margin-bottom:20px}
+h1 span{color:#32e6a1}
+.hero p{font-size:18px;color:#aebdce;line-height:1.7}
+.btn{
+  display:inline-block;margin-top:28px;padding:14px 24px;
+  background:#32e6a1;color:#041018;border-radius:8px;
+  text-decoration:none;font-weight:bold
+}
+.btn:hover{background:#5ff0b6}
+
+.hero-card{
+  width:350px;padding:25px;border-radius:18px;
+  background:#101f32;border:1px solid #29435e;
+  box-shadow:0 20px 50px #0006
+}
+.scan{height:180px;border-radius:12px;background:
+linear-gradient(120deg,#162b40,#274e55);
+position:relative;overflow:hidden;margin-bottom:20px}
+.scan:after{
+  content:"AI SCANNING";position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);color:#32e6a1;
+  border:1px solid #32e6a1;padding:10px 18px;border-radius:8px
+}
+.status{display:flex;justify-content:space-between;color:#9eb1c5}
+.status strong{color:#32e6a1}
+
+section{padding:55px 6%}
+.section-title{text-align:center;margin-bottom:30px}
+.section-title h2{font-size:32px}
+.section-title p{color:#8fa3b8;margin-top:8px}
+
+.stats{
+ display:grid;grid-template-columns:repeat(4,1fr);gap:18px
+}
+.stat{
+ background:#0d1b2c;padding:25px;border-radius:14px;
+ border:1px solid #1d334b
+}
+.stat h3{font-size:32px;color:#32e6a1}
+.stat p{color:#9cafc2;margin-top:8px}
+
+.dashboard{
+ display:grid;grid-template-columns:1.5fr 1fr;gap:22px
+}
+.card{
+ background:#0d1b2c;border:1px solid #1d334b;
+ border-radius:15px;padding:22px
+}
+.card h3{margin-bottom:18px}
+
+.map{
+ height:330px;border-radius:12px;position:relative;overflow:hidden;
+ background-color:#152536;
+ background-image:
+ linear-gradient(#ffffff0d 1px,transparent 1px),
+ linear-gradient(90deg,#ffffff0d 1px,transparent 1px);
+ background-size:45px 45px
+}
+.road{position:absolute;background:#354b60}
+.r1{width:120%;height:35px;top:45%;left:-10%;transform:rotate(-10deg)}
+.r2{width:35px;height:120%;left:52%;top:-10%;transform:rotate(18deg)}
+.marker{
+ position:absolute;width:17px;height:17px;background:#ff4d5f;
+ border-radius:50%;box-shadow:0 0 0 7px #ff4d5f33
+}
+.m1{top:38%;left:30%}.m2{top:62%;left:65%;background:#ffc857}
+.m3{top:25%;left:72%;background:#32e6a1}
+
+.issue{
+ display:flex;align-items:center;justify-content:space-between;
+ padding:14px 0;border-bottom:1px solid #1d3045
+}
+.issue:last-child{border-bottom:0}
+.issue small{display:block;color:#8499ad;margin-top:5px}
+.priority{padding:5px 9px;border-radius:6px;font-size:11px}
+.high{background:#4b2029;color:#ff6d7c}
+.medium{background:#493a1d;color:#ffc857}
+.low{background:#153a31;color:#32e6a1}
+
+.flow{
+ display:grid;grid-template-columns:repeat(5,1fr);gap:12px
+}
+.step{
+ text-align:center;background:#0d1b2c;padding:20px 10px;
+ border-radius:12px;border:1px solid #1d334b
+}
+.step .icon{font-size:28px;margin-bottom:10px}
+.step h4{color:#32e6a1}
+.step p{font-size:12px;color:#8fa3b8;margin-top:6px}
+
+footer{
+ padding:25px 6%;text-align:center;color:#71869c;
+ border-top:1px solid #1d3048
+}
+
+@media(max-width:900px){
+ .hero{flex-direction:column}.hero-card{width:100%}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .dashboard{grid-template-columns:1fr}
+ .flow{grid-template-columns:1fr 1fr}
+}
+@media(max-width:550px){
+ h1{font-size:38px}.stats{grid-template-columns:1fr}
+ nav{display:none}.flow{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">URBAN <span>LENS</span></div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#detections">Detections</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="badge">SMART INDIA HACKATHON 2026</div>
+    <h1>Making Every Bus a<br><span>Moving Urban Sensor.</span></h1>
+    <p>
+      Urban Lens uses AI-powered cameras, GPS and vibration sensors
+      installed on public transport vehicles to automatically detect
+      potholes, road damage, missing dividers and damaged signs.
+    </p>
+    <a href="#dashboard" class="btn">View Live Dashboard →</a>
+  </div>
+
+  <div class="hero-card">
+    <div class="scan"></div>
+    <div class="status">
+      <span>AI Detection</span><strong>ACTIVE</strong>
+    </div>
+    <br>
+    <div class="status">
+      <span>Vehicle</span><strong>BUS-104</strong>
+    </div>
+    <br>
+    <div class="status">
+      <span>GPS</span><strong>CONNECTED</strong>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <h2>Urban Intelligence at a Glance</h2>
+    <p>Real-time infrastructure monitoring powered by public transport</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><h3>128</h3><p>Road Issues Detected</p></div>
+    <div class="stat"><h3>12</h3><p>Active Buses</p></div>
+    <div class="stat"><h3>86</h3><p>Locations Mapped</p></div>
+    <div class="stat"><h3>24</h3><p>High Priority Issues</p></div>
+  </div>
+</section>
+
+<section id="dashboard">
+  <div class="section-title">
+    <h2>Live Urban Dashboard</h2>
+    <p>Monitor road conditions detected by the fleet</p>
+  </div>
+
+  <div class="dashboard">
+
+    <div class="card">
+      <h3>📍 Live Road Issue Map</h3>
+      <div class="map">
+        <div class="road r1"></div>
+        <div class="road r2"></div>
+        <div class="marker m1"></div>
+        <div class="marker m2"></div>
+        <div class="marker m3"></div>
+      </div>
+    </div>
+
+    <div class="card" id="detections">
+      <h3>Recent Detections</h3>
+
+      <div class="issue">
+        <div>🕳️ Pothole<small>17.6599, 75.9064</small></div>
+        <span class="priority high">HIGH</span>
+      </div>
+
+      <div class="issue">
+        <div>🚧 Damaged Divider<small>17.6621, 75.9042</small></div>
+        <span class="priority high">HIGH</span>
+      </div>
+
+      <div class="issue">
+        <div>⚠️ Damaged Sign<small>17.6578, 75.9101</small></div>
+        <span class="priority medium">MEDIUM</span>
+      </div>
+
+      <div class="issue">
+        <div>〰️ Road Crack<small>17.6552, 75.9087</small></div>
+        <span class="priority low">LOW</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <h2>How Urban Lens Works</h2>
+    <p>From the road to the municipal dashboard</p>
+  </div>
+
+  <div class="flow">
+    <div class="step">
+      <div class="icon">🚌</div>
+      <h4>Bus Camera</h4>
+      <p>Captures road conditions</p>
+    </div>
+
+    <div class="step">
+      <div class="icon">🤖</div>
+      <h4>AI Detection</h4>
+      <p>Identifies infrastructure damage</p>
+    </div>
+
+    <div class="step">
+      <div class="icon">📡</div>
+      <h4>GPS + IMU</h4>
+      <p>Confirms location and impact</p>
+    </div>
+
+    <div class="step">
+      <div class="icon">☁️</div>
+      <h4>Cloud</h4>
+      <p>Stores and analyzes alerts</p>
+    </div>
+
+    <div class="step">
+      <div class="icon">🛠️</div>
+      <h4>Repair</h4>
+      <p>Creates maintenance tickets</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="card" style="text-align:center;max-width:900px;margin:auto">
+    <h2 style="color:#32e6a1;margin-bottom:12px">Why Urban Lens?</h2>
+    <p style="color:#9cafc2;line-height:1.8">
+      Instead of installing thousands of expensive roadside cameras,
+      Urban Lens transforms existing public transport fleets into
+      mobile sensing networks. Every journey creates valuable,
+      location-aware data that helps cities identify and prioritize
+      road maintenance.
+    </p>
+  </div>
+</section>
+
+<footer>
+  © 2026 Urban Lens • Smart India Hackathon Prototype
+</footer>
+
+</body>
+</html>
